@@ -53,28 +53,28 @@ def descriptografar_arquivo(dados, senha):
         st.error(f"Erro ao descriptografar o arquivo: {e}")
         return None
 
-# Interface com Streamlit
+# Titulo da Pagina
 st.title("Projeto de Criptografia de Arquivos")
 
-# Escolha de ação: Criptografar ou Descriptografar
+# Escolha entre Criptografar ou Descriptografar
 opcao = st.selectbox("Escolha a ação:", ["Criptografar", "Descriptografar"])
 
-# Upload do arquivo
+# Campo para o arquivo
 arquivo = st.file_uploader("Selecione o arquivo", type=["txt", "pdf", "png", "jpg", "jpeg", "docx","encrypted"])
 
-# Campo para a senha
+# Input para senha
 senha = st.text_input("Digite a senha", type="password")
 
-# Botão para executar a ação
+
 if st.button("Executar"):
     if arquivo is not None and senha:
-        # Lê os dados do arquivo carregado
+        
         dados = arquivo.read()
         
         if opcao == "Criptografar":
             dados_processados = criptografar_arquivo(dados, senha)
             if dados_processados is not None:
-                # Converte o conteúdo criptografado em um arquivo para download
+                # Essa função vai converter o conteúdo criptografado em um arquivo para download
                 st.download_button(
                     label="Baixar arquivo criptografado",
                     data=BytesIO(dados_processados),
@@ -85,7 +85,7 @@ if st.button("Executar"):
         elif opcao == "Descriptografar":
             dados_processados = descriptografar_arquivo(dados, senha)
             if dados_processados is not None:
-                # Converte o conteúdo descriptografado em um arquivo para download
+                # Essa função vai converter o conteúdo descriptografado em um arquivo para download
                 st.download_button(
                     label="Baixar arquivo descriptografado",
                     data=BytesIO(dados_processados),
